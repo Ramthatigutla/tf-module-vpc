@@ -50,3 +50,9 @@ module "subnets" {
      },
        var.tags)
    }
+   resource "aws_route" "route-ngw" {
+     count                  = length(local.private_route_table_ids)
+     route_table_id         = element(local.private_route_table_ids, count.index)
+     destination_cidr_block = "0.0.0.0/0"
+     gateway_id             = aws_nat_gateway.ngw.id
+}
