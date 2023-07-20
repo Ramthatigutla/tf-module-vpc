@@ -29,7 +29,7 @@ module "subnets" {
      vpc_id = aws_vpc.main.id
 
      tags = merge({
-       name = "${var.env}-igw"
+       Name = "${var.env}-igw"
      },
        var.tags)
      }
