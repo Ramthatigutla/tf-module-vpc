@@ -25,3 +25,13 @@ module "subnets" {
      auto_accept = true
    }
 
+   resource "aws_internet_gateway" "igw"{
+     vpc_id = aws_vpc.main.id
+
+     tags = merge({
+       name = "${var.env}-igw"
+     },
+       var.tags)
+     }
+   }
+
