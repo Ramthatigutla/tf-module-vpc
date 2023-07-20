@@ -7,6 +7,7 @@ resource "aws_vpc" "main" {
     var.tags)
 }
 
+
 resource "aws_subnet" "main" {
   count      = length(var.web_subnet_cidr_block)
   vpc_id     = aws_vpc.main.id
