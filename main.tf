@@ -55,10 +55,15 @@ module "subnets" {
      route_table_id         = element(local.private_route_table_ids, count.index)
      destination_cidr_block = "0.0.0.0/0"
      gateway_id             = aws_nat_gateway.ngw.id
-}
+   }
    resource "aws_route" "peer-route" {
      count                  = length(local.all_route_table_ids)
      route_table_id         = element(local.all_route_table_ids, count.index)
      destination_cidr_block = "172.31.0.0/16"
      vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
-}
+   }
+   resource "aws_route" "default-vpc-peer-route" {
+     route_table_id            = var.default-vpc-rt
+     destination_cidr_block    = var.cidr_block
+     vpc_peering_connection_id = aws_vpc_peering_connection.peer.id
+   }
